@@ -12,7 +12,8 @@ namespace SGWebAPI.Controllers
         {
             _logger = logger;
         }
-        
+
+        [HttpGet]
         public string Get()
         {
             return "Your API is up and running";
