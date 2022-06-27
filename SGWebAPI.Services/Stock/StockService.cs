@@ -8,6 +8,8 @@ using SGWebAPI.Models;
 using SGWebAPI.Core;
 using AutoMapper;
 using SGWebAPI.Models.Search;
+using SGWebAPI.Models.Paging;
+using SGWebAPI.Models.Helper;
 
 namespace SGWebAPI.Services.Stock
 {
@@ -50,10 +52,10 @@ namespace SGWebAPI.Services.Stock
               }, cancellationToken);
         }
 
-        public async Task<IEnumerable<Models.Stock>> GetAllStocksAsync(StockSearch param, CancellationToken cancellationToken)
+        public async Task<PagedList<Models.Stock>> GetAllStocksAsync(StockSearch param, CancellationToken cancellationToken)
         {
             var lstStocks = await _fileService.ReadFromFileAsync(cancellationToken);
-            return lstStocks.Skip((param.PageNo - 1) * param.PageSize).Take(param.PageSize);
+            return lstStocks.ToPagedList(param.PageSize, param.PageNo);            
         }
     }
 }

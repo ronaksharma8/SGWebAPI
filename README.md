@@ -15,6 +15,11 @@ cd SGWebAPI
 
 - I have added AutoMapper library which creates resultant objects quickly from the source objects. i.e. https://github.com/AutoMapper/AutoMapper
 - Additionally, added the pagination feature in-memory using linq ie. Default pageSize = 50
+- In GetAllStock api, we are additionally sending columns to render on client-side. Also, added some attributes too.
+- ColumnOrder :- says which column should come first in grid
+- hidden :- should this column render on UI
+- Queryable :- should this column be sortable on UI.
+- Key :- indicated whether this column is primary key.
 
 ## Authentication
 #### Running IdentityServer

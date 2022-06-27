@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SGWebAPI.Models;
+using SGWebAPI.Models.Paging;
 using SGWebAPI.Models.Search;
 using SGWebAPI.Services.Stock;
 
@@ -20,7 +21,7 @@ namespace SGWebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Stock>> GetStocksAsync([FromQuery] StockSearch param, CancellationToken cancellationToken = default)
+        public async Task<PagedList<Stock>> GetStocksAsync([FromQuery] StockSearch param, CancellationToken cancellationToken = default)
         {
             return await _stockService.GetAllStocksAsync(param, cancellationToken);
         }

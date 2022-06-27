@@ -55,9 +55,9 @@ namespace SGWebAPI.Test
 
             A.CallTo(() => _fileService.ReadFromFileAsync(new CancellationToken())).Returns(_fakeStockList);
 
-            var lstStock = await _stockService.GetAllStocksAsync(param, new CancellationToken());
+            var pagedList = await _stockService.GetAllStocksAsync(param, new CancellationToken());
 
-            Assert.That(lstStock.Count(), Is.EqualTo(1));
+            Assert.That(pagedList.Items.Count(), Is.EqualTo(1));
         }
 
         [Test]
