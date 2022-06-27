@@ -1,0 +1,120 @@
+{
+	"variables": [],
+	"info": {
+		"name": "practical",
+		"_postman_id": "a22b78e8-eb17-8319-0d3b-1fe6f5a7d47e",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Check API status",
+			"request": {
+				"url": "https://localhost:7010/status",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Post Order",
+			"request": {
+				"url": "https://localhost:7010/api/stock",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IkMwQjA1MkI3MzY0Q0U4NTdGOUMxRTYwODE0NUZCRDIxIiwidHlwIjoiYXQrand0In0.eyJuYmYiOjE2NTYxNjc1NzEsImV4cCI6MTY1NjE3MTE3MSwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzAxMCIsImNsaWVudF9pZCI6InJlYWN0Q2xpZW50IiwianRpIjoiQ0RFMzlBNDY1NTJGM0NDRTg1RkREN0FFMTkxNkQ3RTkiLCJpYXQiOjE2NTYxNjc1NzEsInNjb3BlIjpbIlNHV2ViQVBJIl19.EviVdf8b7dFv0KDl-nkPcJV98x4K9RwEglV95kcOP6dNeCFXqFhi111OkHO_VsuZDBrw7JTKZTgBuPxREZ0QMRJP5cS5Eih3aivitDuabUEwZ6P60rFD43eAPRK4D1B7FcxxF4ESP23d01JEZJcYcfoDOD-OBFlZJI0MSCSZak1fHlNb-vTcKiSfgL96IFNgt2UD3jIdTxNfAnd3PeN8qglQ3Xi0aDIAWtEg0zlBUSHr1k-RJPlMChv2aVxPRUG5z5Vvbk-CiMhAfJCpI1bjpYWFHtOYQSuKfWOimTXxsShIA-Lj8tY4VgyhvGEdxji5kJSBzQGSqI_UGfQlbP3oCg",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"orderType\": 0,\r\n  \"stockId\": \"00000000-0000-0000-0000-000000000000\",\r\n  \"stockCode\": \"18 HK\",\r\n  \"executionMode\": 1,\r\n  \"orderPrice\": 0.0,\r\n  \"amount\": 0\r\n}\r\n"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get discovery of IdentiyServer",
+			"request": {
+				"url": "https://localhost:7010/.well-known/openid-configuration",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Token for react client",
+			"request": {
+				"url": "https://localhost:7010/connect/token",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "SGWebAPI",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "reactClient",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "secret",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get all stocks with pagination",
+			"request": {
+				"url": "https://localhost:7010/api/stock",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IkMwQjA1MkI3MzY0Q0U4NTdGOUMxRTYwODE0NUZCRDIxIiwidHlwIjoiYXQrand0In0.eyJuYmYiOjE2NTYxNjc1NzEsImV4cCI6MTY1NjE3MTE3MSwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzAxMCIsImNsaWVudF9pZCI6InJlYWN0Q2xpZW50IiwianRpIjoiQ0RFMzlBNDY1NTJGM0NDRTg1RkREN0FFMTkxNkQ3RTkiLCJpYXQiOjE2NTYxNjc1NzEsInNjb3BlIjpbIlNHV2ViQVBJIl19.EviVdf8b7dFv0KDl-nkPcJV98x4K9RwEglV95kcOP6dNeCFXqFhi111OkHO_VsuZDBrw7JTKZTgBuPxREZ0QMRJP5cS5Eih3aivitDuabUEwZ6P60rFD43eAPRK4D1B7FcxxF4ESP23d01JEZJcYcfoDOD-OBFlZJI0MSCSZak1fHlNb-vTcKiSfgL96IFNgt2UD3jIdTxNfAnd3PeN8qglQ3Xi0aDIAWtEg0zlBUSHr1k-RJPlMChv2aVxPRUG5z5Vvbk-CiMhAfJCpI1bjpYWFHtOYQSuKfWOimTXxsShIA-Lj8tY4VgyhvGEdxji5kJSBzQGSqI_UGfQlbP3oCg",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
