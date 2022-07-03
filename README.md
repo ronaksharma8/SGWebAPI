@@ -2,7 +2,7 @@
 This is backend API project 
 
 ## Cloning repository
-- git clone https://github.com/ronaksharma8/SGWebAPI.git master
+- git clone https://github.com/ronaksharma8/SGWebAPI.git
 - git checkout master
 - cd SGWebAPI
 
