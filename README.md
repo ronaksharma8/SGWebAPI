@@ -14,11 +14,16 @@ This is backend API project
 
 - I have added AutoMapper library which creates resultant objects quickly from the source objects. i.e. https://github.com/AutoMapper/AutoMapper
 - Additionally, added the server-side pagination feature to display stock list ie. Default pageSize = 50
-- In GetAllStock api, we are additionally sending columns to render on client-side. Also, added some attributes too.
-- ColumnOrder :- says which column should come first in grid
-- hidden :- should this column render on UI
-- Queryable :- should this column be sortable on UI.
-- Key :- indicated whether this column is primary key.
+- In GetAllStock api, we are additionally sending columns(To display stock list) and OrderColumn(To display orders in Basket) to render on client-side. Also, added some attributes too.
+  - ColumnOrder :- says which column should come first in grid
+  - hidden :- says whether we hide this column on UI
+  - QueryProperty :- says whether this column be sortable on UI.  
+  - ColumnWidth :- says what should be the width of the column on UI.
+  - ColumnName :- says what should be the fieldName for the column defination on UI.
+  - Description :- says what should be the headerName for the column defination on UI.
+  - ColumnEditable :- says whether the column is editable on UI.
+  - ColumnDataType :- says column's DataType on UI.
+  
 
 ## Authentication
 
@@ -30,7 +35,7 @@ This is backend API project
 
 ## Securing API endpoints
 - The endpoints as secured via JWT Bearer token.
-- To get the valid access token, import postman collection from SGWebAPI/SGWebAPI.postman_collection.json and check "Get Token for react client" postman request
+- To get the valid access token, import postman collection from "SGWebAPI/SGWebAPI.postman_collection.json" and check "Get Token for react client" postman request
 - Put the bearer token into Authorisation header in request call and call the API i.e. check "Get all stock with pagination" and "Post Order"  postman request
 
 ## Test project
