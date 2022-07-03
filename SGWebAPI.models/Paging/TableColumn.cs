@@ -19,9 +19,12 @@ namespace SGWebAPI.Models.Paging
         public string Text { get; set; }
         public string DataType { get; set; }
         public bool Hidden { get; set; }
+        public bool Editable { get; set; }
         public bool Sortable { get; set; }
         public int? ColumnOrder { get; set; }
+        public int? ColumnWidth { get; set; }
         public bool IsKey { get; set; }
+        public string[] Values { get; set; }
         public IList<TableColumn> Columns { get; set; }
 
         private static IList<PropertyInfo> GetProperties(Type type)
@@ -88,11 +91,14 @@ namespace SGWebAPI.Models.Paging
 
                 var customAttributes = property.Value.GetCustomAttributes(true);
 
+                var nameAttribute = GetAttribute<ColumnNameAttribute>(customAttributes);
                 var descriptionAttribute = GetAttribute<DescriptionAttribute>(customAttributes);
                 var columnDataTypeAttribute = GetAttribute<ColumnDataTypeAttribute>(customAttributes);
                 var columnHiddenAttribute = GetAttribute<ColumnHiddenAttribute>(customAttributes);
+                var columnEditableAttribute = GetAttribute<ColumnEditableAttribute>(customAttributes);
                 var queryPropertyAttribute = GetAttribute<QueryPropertyAttribute>(customAttributes);
                 var columnOrderAttribute = GetAttribute<ColumnOrderAttribute>(customAttributes);
+                var columnWidthAttribute = GetAttribute<ColumnWidthAttribute>(customAttributes);
                 var isSerializedAsString = GetAttribute<JsonConverterAttribute>(customAttributes)?.ConverterType == typeof(StringEnumConverter);
                 var keyAttribute = GetAttribute<KeyAttribute>(customAttributes);
 
@@ -104,14 +110,17 @@ namespace SGWebAPI.Models.Paging
 
                 var tableColumn = new TableColumn
                 {
-                    Name = property.Key,
+                    Name = nameAttribute?.Name,
                     Text = descriptionAttribute != null
                         ? descriptionAttribute.Description
                         : property.Key.SeparateWordsByTitleCase(),
-                    DataType = columnDataType.ToString(),
+                    DataType = columnDataType.ToString().SeparateWordsByCamelCase(),
+                    Values = columnDataTypeAttribute?.Items,
                     Hidden = columnHiddenAttribute != null,
+                    Editable = columnEditableAttribute != null,
                     Sortable = queryPropertyAttribute != null,
                     ColumnOrder = columnOrderAttribute?.Sequence,
+                    ColumnWidth = columnWidthAttribute?.Width,
                     IsKey = keyAttribute != null,
                 };
 
@@ -158,6 +167,11 @@ namespace SGWebAPI.Models.Paging
             if (propertyType == typeof(DateTime?))
             {
                 return ColumnDataType.Date;
+            }
+
+            if (propertyType.ToString() == "SingleSelect")
+            {
+                return ColumnDataType.SingleSelect;
             }
 
             return ColumnDataType.Number;

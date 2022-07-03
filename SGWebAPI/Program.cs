@@ -12,6 +12,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSGCors();
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddIdentityServer()
     .AddDeveloperSigningCredential()
@@ -36,6 +37,8 @@ builder.Services.Configure<DataLocation>(options => builder.Configuration.GetSec
 builder.Services.AddSGServices();
 
 var app = builder.Build();
+
+app.UseSGCors();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

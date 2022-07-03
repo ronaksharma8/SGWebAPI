@@ -15,5 +15,10 @@ namespace SGWebAPI.Models.Helper
 
             return separated;
         }
+
+        public static string SeparateWordsByCamelCase(this string text)
+        {
+            return string.IsNullOrEmpty(text) || text.Length < 2 ? text.ToLowerInvariant() : char.ToLowerInvariant(text[0]) + text.Substring(1);
+        }
     }
 }

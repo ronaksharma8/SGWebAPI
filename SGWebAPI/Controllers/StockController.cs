@@ -8,7 +8,7 @@ using SGWebAPI.Services.Stock;
 
 namespace SGWebAPI.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class StockController : ControllerBase

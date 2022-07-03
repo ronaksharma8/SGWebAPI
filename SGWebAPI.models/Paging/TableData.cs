@@ -14,6 +14,12 @@ namespace SGWebAPI.Models.Paging
             set;
         }
 
+        public IList<TableColumn> OrderColumns
+        {
+            get;
+            set;
+        }
+
         public TableData()
             : this(TableColumn.CreateDynamicColumnsByList(typeof(T)))
         {

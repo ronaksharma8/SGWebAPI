@@ -14,6 +14,7 @@ namespace SGWebAPI.Models.Attributes
         String,
         Number,
         Date,
-        Boolean
+        Boolean,
+        SingleSelect
     }
 }

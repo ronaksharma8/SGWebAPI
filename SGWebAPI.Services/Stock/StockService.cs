@@ -55,7 +55,8 @@ namespace SGWebAPI.Services.Stock
         public async Task<PagedList<Models.Stock>> GetAllStocksAsync(StockSearch param, CancellationToken cancellationToken)
         {
             var lstStocks = await _fileService.ReadFromFileAsync(cancellationToken);
-            return lstStocks.ToPagedList(param.PageSize, param.PageNo);            
+            var lst = lstStocks.ToPagedList(param.PageSize, param.PageNo);
+            return lst;
         }
     }
 }

@@ -28,8 +28,8 @@ namespace SGWebAPI.Test
                 StockId = Guid.NewGuid(),
                 Currency = "HKD",
                 Ric = "0434.HK",
-                BloomerbergTicket = "434 HK",
-                BlommerbergTicketLocal = "434 HK",
+                BloombergTicker = "434 HK",
+                BloombergTickerLocal = "434 HK",
                 Name = "Boyaa Interactive International Ltd",
                 Country = "Hong Kong",
                 Price = 500.24
