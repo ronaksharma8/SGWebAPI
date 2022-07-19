@@ -1,15 +1,10 @@
-﻿using SGWebAPI.Services.FileService;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SGWebAPI.Models;
+﻿using AutoMapper;
 using SGWebAPI.Core;
-using AutoMapper;
-using SGWebAPI.Models.Search;
-using SGWebAPI.Models.Paging;
+using SGWebAPI.Models;
 using SGWebAPI.Models.Helper;
+using SGWebAPI.Models.Paging;
+using SGWebAPI.Models.Search;
+using SGWebAPI.Services.FileService;
 
 namespace SGWebAPI.Services.Stock
 {
@@ -17,6 +12,7 @@ namespace SGWebAPI.Services.Stock
     {
         private const string _5HK = "5 HK";
         private const string _11HK = "11 HK";
+        private const string _388HK = "388 HK";
 
         private readonly IFileService _fileService;
         private readonly IMapper _mapper;
@@ -32,6 +28,11 @@ namespace SGWebAPI.Services.Stock
             return await Task.Run(() =>
               {
                   //validation here..
+                  if (createOrderRequest.StockCode == _388HK)
+                  {
+                      throw new Exception388HK($"Cannot execute an order having stock code as {_388HK}");
+                  }
+
                   if (createOrderRequest.StockCode == _5HK)
                   {
                       throw new Exception5HK($"Cannot execute an order having stock code as {_5HK}");
@@ -55,8 +56,7 @@ namespace SGWebAPI.Services.Stock
         public async Task<PagedList<Models.Stock>> GetAllStocksAsync(StockSearch param, CancellationToken cancellationToken)
         {
             var lstStocks = await _fileService.ReadFromFileAsync(cancellationToken);
-            var lst = lstStocks.ToPagedList(param.PageSize, param.PageNo);
-            return lst;
+            return lstStocks.ToPagedList(param.PageSize, param.PageNo);            
         }
     }
 }

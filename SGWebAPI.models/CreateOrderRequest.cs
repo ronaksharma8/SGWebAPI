@@ -12,7 +12,7 @@ namespace SGWebAPI.Models
         public OrderType OrderType { get; set; }
         public Guid StockId { get; set; }
 
-        [NoSpecificStockCode("388 HK")]
+        //[NoSpecificStockCode("388 HK")]
         public string StockCode { get; set; }
         public ExecutionMode ExecutionMode { get; set; }
 

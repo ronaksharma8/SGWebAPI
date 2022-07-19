@@ -2,6 +2,7 @@ using IdentityServer4.Models;
 using IdentityServer4.Test;
 using Microsoft.IdentityModel.Tokens;
 using SGWebAPI.Extension;
+using SGWebAPI.Middleware;
 using SGWebAPI.Models.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -38,6 +39,7 @@ builder.Services.AddSGServices();
 
 var app = builder.Build();
 
+app.UseMiddleware<SGExceptionMiddleware>();
 app.UseSGCors();
 
 // Configure the HTTP request pipeline.

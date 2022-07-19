@@ -19,8 +19,7 @@ namespace SGWebAPI.Models.Paging
         public int StartRecord { get; private set; }
 
 
-        public PagedList(IList<T> pagedItems, int totalCount, int pageSize, int totalPages, int pageNo, int startRecord, Type concreteType = null)
-            : base(null)
+        public PagedList(IList<T> pagedItems, int totalCount, int pageSize, int totalPages, int pageNo, int startRecord, Type concreteType = null)        
         {
             this.Columns = concreteType == null
                 ? TableColumn.CreateDynamicColumnsByList(typeof(T))

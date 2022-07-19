@@ -11,40 +11,15 @@ namespace SGWebAPI.Models.Helper
     {
         public static int CalculatePageStartRecord(int pageSize, int pageNo) => ((Math.Max(1, pageNo) - 1) * Math.Max(0, pageSize)) + 1;
 
-        public static int CalculatePageNo(int pageSize, int recordNo)
-        {
-            try
-            {
-                var pageNo = ((int)(((double)recordNo / (double)pageSize)));
-                if (recordNo % pageSize > 0)
-                {
-                    ++pageNo;
-                }
-
-                return pageNo;
-            }
-            catch
-            {
-                return 0;
-            }
-        }
-
         public static int CalculateTotalPages(int pageSize, int totalCount)
         {
-            try
+            var pages = totalCount / pageSize;
+            if (totalCount % pageSize > 0)
             {
-                var pages = totalCount / pageSize;
-                if (totalCount % pageSize > 0)
-                {
-                    ++pages;
-                }
+                ++pages;
+            }
 
-                return Math.Max(1, pages);
-            }
-            catch
-            {
-                return 1;
-            }
+            return Math.Max(1, pages);
         }
 
         public static PagedList<T> ToPagedList<T>(this IEnumerable<T> query, int pageSize, int pageNo) => query.AsQueryable().ToPagedList(pageSize, pageNo);
@@ -60,9 +35,7 @@ namespace SGWebAPI.Models.Helper
 
         private static (IQueryable<T> pagedQuery, PagingParameters pagingParameters) PageIt<T>(this IQueryable<T> query, int totalCount, int pageSize, int pageNo)
         {
-            pageSize = Math.Max(0, pageSize);
             var totalPages = CalculateTotalPages(pageSize, totalCount);
-            pageNo = Math.Max(1, Math.Min(pageNo, totalPages));
             var startRecord = CalculatePageStartRecord(pageSize, pageNo);
             var skipCount = (pageNo - 1) * pageSize;
             query = query.Skip(skipCount).Take(pageSize);
